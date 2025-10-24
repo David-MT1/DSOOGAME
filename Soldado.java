@@ -11,6 +11,7 @@ public class Soldado {
     private int velocidad;
     private String actitud;
     private Boolean vive;
+    private String tipo;
 
 
 
@@ -91,11 +92,11 @@ public class Soldado {
 
     //METODOS
 
-    public void atacarA(Soldado enemigo) {
+    public void atacar() {
     
 }
 
-public void defenderDe(Soldado enemigo) {
+public void defender() {
 
 }
 
