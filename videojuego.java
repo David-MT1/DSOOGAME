@@ -20,7 +20,25 @@ public class videojuego {
             soldadoR[i].setFila(fila);
             soldadoR[i].setColumna(columna);
             soldadoR[i].setPuntosVida(rand.nextInt(5) + 1);
-            soldadoR[i].setNombre("R-" + (i + 1));
+            int tipe = rand.nextInt(4)+1;
+            switch (tipe) {
+                case 1:{
+                    soldadoR[i].setNombre("R-"+(i+1)+" S");
+                    break;
+                }
+                case 2:{
+                    soldadoR[i].setNombre("R-"+(i+1)+" E");
+                    break;
+                }
+                case 3:{
+                    soldadoR[i].setNombre("R-"+(i+1)+" A");
+                    break;
+                }
+                case 4:{
+                    soldadoR[i].setNombre("R-"+(i+1)+" C");
+                    break;
+                }
+            }
         }
         return soldadoR;
     }
@@ -38,7 +56,25 @@ public class videojuego {
             soldadoA[i].setFila(fila);
             soldadoA[i].setColumna(columna);
             soldadoA[i].setPuntosVida(rand.nextInt(5) + 1);
-            soldadoA[i].setNombre("A-" + (i + 1));
+            int tipe = rand.nextInt(4)+1;
+            switch (tipe) {
+                case 1:{
+                    soldadoA[i].setNombre("A-"+(i+1)+" S");
+                    break;
+                }
+                case 2:{
+                    soldadoA[i].setNombre("A-"+(i+1)+" E");
+                    break;
+                }
+                case 3:{
+                    soldadoA[i].setNombre("A-"+(i+1)+" A");
+                    break;
+                }
+                case 4:{
+                    soldadoA[i].setNombre("A-"+(i+1)+" C");
+                    break;
+                }
+            }
         }
         return soldadoA;
     }
@@ -74,6 +110,8 @@ public class videojuego {
     }
 
     public void datosEquipos(){
+            System.out.println("En este juego hay 2 equipos\nEncontramos tipos de soldados en cada ejercito:\nSoldado(s)\nArquero(A)\nEspasachin(E)\nCaballero(C)\n\n");
+
         System.out.println("EL EQUIPO AZUL ESTA CONFORMADO");
         for (int i = 0; i < soldadoA.length; i++) {
             System.out.println(soldadoA[i].toString());         
@@ -112,12 +150,12 @@ public class videojuego {
                 int codigoR = Integer.parseInt(nombreR.substring(2)) - 1;
 
                 if (codigoR < 0 || codigoR >= soldadoR.length) {
-                    System.out.println("¡Soldado inválido!");
+                    System.out.println("Soldado inválido!");
                     continue;
                 }
 
                 soldadoR[codigoR].moverse(soldadoR[codigoR].getFila(), soldadoR[codigoR].getColumna());
-                peleaRojo(soldadoR, soldadoA, codigoR);
+                pelea(soldadoR, soldadoA, codigoR);
                 Tablero(soldadoA, soldadoR);
             }
 
@@ -155,24 +193,6 @@ public class videojuego {
                     System.out.println("PERDISTE!!"+a[nroSoldado].getNombre() + " HA MUERTO!");
                     a[nroSoldado].morir();
                 } 
-            }
-        }
-    }
-
-    public void peleaRojo(Soldado[] r, Soldado[] a, int nroSoldado) {
-        for (int i = 0; i < a.length; i++) {
-            if (r[nroSoldado].getFila() == a[i].getFila() && r[nroSoldado].getColumna() == a[i].getColumna()) {
-                if (r[nroSoldado].getPuntosVida() > a[i].getPuntosVida()) {
-                    System.out.println(a[i].getNombre() + " HA MUERTO!");
-                    a[i].morir();
-                } else if (r[nroSoldado].getPuntosVida() < a[i].getPuntosVida()) {
-                    System.out.println(r[nroSoldado].getNombre() + " HA MUERTO!");
-                    r[nroSoldado].morir();
-                } else {
-                    System.out.println("¡Ambos mueren en empate!");
-                    r[nroSoldado].morir();
-                    a[i].morir();
-                }
             }
         }
     }
