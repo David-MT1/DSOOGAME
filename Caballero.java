@@ -2,11 +2,17 @@ import java.util.*;;
 public class Caballero extends Soldado {
     private String arma="espada";
     private boolean montar = true;
-    /*
-    public Caballero(String tipo){
-        super(tipo);
+    
+    public Caballero(String nombre){
+        super(nombre);
+        setPuntosVida(0);
     }
-    */
+    @Override
+    public void setPuntosVida(int puntosVida){
+        Random rand = new Random();
+        super.setPuntosVida(rand.nextInt(3)+3);
+    }
+    
     public void setArma(String arma){
         this.arma=arma;
     }

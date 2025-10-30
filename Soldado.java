@@ -11,8 +11,11 @@ public class Soldado {
     private int velocidad;
     private String actitud;
     private Boolean vive;
-    private String tipo;
 
+    public Soldado(String nombre){
+        this.nombre = nombre;
+
+    }
 
 
     public void setNombre(String nombre){

@@ -16,29 +16,29 @@ public class videojuego {
                 columna = rand.nextInt(10);
             } while (ocupado[fila][columna]);
             ocupado[fila][columna] = true;
-            soldadoR[i] = new Soldado();
-            soldadoR[i].setFila(fila);
-            soldadoR[i].setColumna(columna);
-            soldadoR[i].setPuntosVida(rand.nextInt(5) + 1);
+
             int tipe = rand.nextInt(4)+1;
             switch (tipe) {
                 case 1:{
-                    soldadoR[i].setNombre("R-"+(i+1)+" S");
+                    soldadoR[i] = new Lancero("R-"+(i+1)+" L");
                     break;
                 }
                 case 2:{
-                    soldadoR[i].setNombre("R-"+(i+1)+" E");
+                    soldadoR[i] = new Espadachin("R-"+(i+1)+" E");
                     break;
                 }
                 case 3:{
-                    soldadoR[i].setNombre("R-"+(i+1)+" A");
+                    soldadoR[i] = new Arquero("R-"+(i+1)+" A");
                     break;
                 }
                 case 4:{
-                    soldadoR[i].setNombre("R-"+(i+1)+" C");
+                    soldadoR[i] = new Caballero("R-"+(i+1)+" C");
                     break;
                 }
             }
+            soldadoR[i].setFila(fila);
+            soldadoR[i].setColumna(columna);
+            
         }
         return soldadoR;
     }
@@ -52,29 +52,28 @@ public class videojuego {
                 columna = rand.nextInt(10);
             } while (ocupado[fila][columna]);
             ocupado[fila][columna] = true;
-            soldadoA[i] = new Soldado();
-            soldadoA[i].setFila(fila);
-            soldadoA[i].setColumna(columna);
-            soldadoA[i].setPuntosVida(rand.nextInt(5) + 1);
             int tipe = rand.nextInt(4)+1;
             switch (tipe) {
                 case 1:{
-                    soldadoA[i].setNombre("A-"+(i+1)+" S");
+                    soldadoA[i] = new Lancero("A-"+(i+1)+" L");
                     break;
                 }
                 case 2:{
-                    soldadoA[i].setNombre("A-"+(i+1)+" E");
+                    soldadoA[i] = new Espadachin("A-"+(i+1)+" E");
                     break;
                 }
                 case 3:{
-                    soldadoA[i].setNombre("A-"+(i+1)+" A");
+                    soldadoA[i] = new Arquero("A-"+(i+1)+" A");
                     break;
                 }
                 case 4:{
-                    soldadoA[i].setNombre("A-"+(i+1)+" C");
+                    soldadoA[i] = new Caballero("A-"+(i+1)+" C");
                     break;
                 }
             }
+            soldadoA[i].setFila(fila);
+            soldadoA[i].setColumna(columna);
+            
         }
         return soldadoA;
     }
@@ -110,7 +109,7 @@ public class videojuego {
     }
 
     public void datosEquipos(){
-            System.out.println("En este juego hay 2 equipos\nEncontramos tipos de soldados en cada ejercito:\nSoldado(s)\nArquero(A)\nEspasachin(E)\nCaballero(C)\n\n");
+        System.out.println("En este juego hay 2 equipos\nEncontramos tipos de soldados en cada ejercito:\nSoldado(s)\nArquero(A)\nEspasachin(E)\nCaballero(C)\n\n");
 
         System.out.println("EL EQUIPO AZUL ESTA CONFORMADO");
         for (int i = 0; i < soldadoA.length; i++) {
@@ -120,6 +119,36 @@ public class videojuego {
         for (int i = 0; i < soldadoR.length; i++) {
             System.out.println(soldadoR[i].toString());
         }
+        soldadoMayorVida(soldadoA, soldadoR);
+        promedioVida(soldadoA, soldadoR);
+
+        System.out.println("Los soldados ordenados son: \n");
+            Soldado[] rankingAzul = rankingPoder(soldadoA);
+            Soldado[] rankingRojo = rankingPoder(soldadoR);
+
+            System.out.println("\nLos soldados ordenados por puntos de vida son: \n");
+
+            System.out.println("EL EQUIPO AZUL (ordenado):");
+            for (int i = 0; i < rankingAzul.length; i++) {
+                System.out.println(rankingAzul[i].toString());
+            }
+
+            System.out.println("EL EQUIPO ROJO (ordenado):");
+            for (int i = 0; i < rankingRojo.length; i++) {
+                System.out.println(rankingRojo[i].toString());
+            }
+        if(soldadoA.length>soldadoR.length){
+            System.out.println("EL EQUIPO AZUL GANA POR MAYORIA EN SU EJERCITO!!!!");
+            System.out.println("------DEMUESTRA LO CONTRARIO COMENZANDO EL JUEGO------");
+        }else if(soldadoA.length<soldadoR.length){
+            System.out.println("EL EQUIPO ROJO GANA POR MAYORIA EN SU EJERCITO!!!!");
+            System.out.println("------DEMUESTRA LO CONTRARIO COMENZANDO EL JUEGO------");
+        }else{
+            System.out.println("TIENEN MISMA CANTIDAD DE SOLDADOS!!!!");
+            System.out.println("------COMIENZA EL JUEGO PARA DESEMPATAR------");
+
+        }
+
     }
 
     public void iniciarJuego() {
@@ -195,5 +224,69 @@ public class videojuego {
                 } 
             }
         }
+        
+    }
+    public void soldadoMayorVida(Soldado[] soldadoA, Soldado[] soldadoR){
+        int mayor = soldadoA[0].getPuntosVida();
+        for(int i = 1; i<soldadoA.length;i++) {
+            if(mayor<soldadoA[i].getPuntosVida()){
+                mayor=soldadoA[i].getPuntosVida();
+            }
+        }
+        for (int i = 0; i < soldadoA.length; i++) {
+            if(mayor==soldadoA[i].getPuntosVida()){
+                System.out.println("el soldado con mayor vida es "+soldadoA[i].getNombre());
+                break;
+            }
+        }
+        int mayorR = soldadoR[0].getPuntosVida();
+        for(int i = 1; i<soldadoR.length;i++) {
+            if(mayorR<soldadoR[i].getPuntosVida()){
+                mayorR=soldadoR[i].getPuntosVida();
+            }
+        }
+        for (int i = 0; i < soldadoR.length; i++) {
+            if(mayorR==soldadoR[i].getPuntosVida()){
+                System.out.println("el soldado con mayor vida es "+soldadoR[i].getNombre());
+                break;
+            }
+        }
+    }
+
+    public void promedioVida(Soldado[] soldadoA, Soldado[] soldadoR){
+        double sumaA = 0;
+        for (int i = 0; i < soldadoA.length; i++) {
+            sumaA = soldadoA[i].getPuntosVida()+sumaA;
+        }
+        double promedioA = sumaA/soldadoA.length;
+        System.out.println("EL PROMEDIO DE VIDA DEL EQUIPO AZUL ES: "+promedioA);
+
+        double sumaR = 0;
+        for (int i = 0; i < soldadoR.length; i++) {
+            sumaR = soldadoR[i].getPuntosVida()+sumaR;
+        }
+        double promedioR = sumaR/soldadoR.length;
+        System.out.println("EL PROMEDIO DE VIDA DEL EQUIPO ROJO ES: "+promedioR);
+
+    }
+
+    public Soldado[] rankingPoder(Soldado[] soldadoA) {
+        int n = soldadoA.length;
+        boolean cambio;
+        for (int i = 0; i < n - 1; i++) {
+            cambio = false;
+            for (int j = 0; j < n - i - 1; j++) {
+                if (soldadoA[j].getPuntosVida() < soldadoA[j + 1].getPuntosVida()) {
+                    Soldado temp = soldadoA[j];
+                    soldadoA[j] = soldadoA[j + 1];
+                    soldadoA[j + 1] = temp;
+                    cambio = true;
+                }
+            }
+            if (!cambio) {
+                break;
+            }
+        }
+        return soldadoA;
     }
 }
