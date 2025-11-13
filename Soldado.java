@@ -116,7 +116,7 @@ public void defender() {
                 }break;
             }
             case("R"):{
-                if(fila==9){
+                if(fila==9){ 
                     System.out.println("No puede moverse para abajo");
                 } else {
                     fila=fila+1;
