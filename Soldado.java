@@ -1,5 +1,6 @@
+import java.io.Serializable; 
 import java.util.*;
-public class Soldado {
+public class Soldado implements Serializable{
 
     private String nombre;
     private int puntosVida;

@@ -119,7 +119,7 @@ public class videojuego {
         for (int i = 0; i < soldadoR.length; i++) {
             System.out.println(soldadoR[i].toString());
         }
-        soldadoMayorVida(soldadoA, soldadoR);
+        /*soldadoMayorVida(soldadoA, soldadoR);
         promedioVida(soldadoA, soldadoR);
 
         System.out.println("Los soldados ordenados son: \n");
@@ -137,6 +137,7 @@ public class videojuego {
             for (int i = 0; i < rankingRojo.length; i++) {
                 System.out.println(rankingRojo[i].toString());
             }
+                */
         if(soldadoA.length>soldadoR.length){
             System.out.println("EL EQUIPO AZUL GANA POR MAYORIA EN SU EJERCITO!!!!");
             System.out.println("------DEMUESTRA LO CONTRARIO COMENZANDO EL JUEGO------");
@@ -150,7 +151,7 @@ public class videojuego {
         }
 
     }
-
+    
     public void iniciarJuego() {
         System.out.println("¿Desea comenzar el juego? (s/n)");
         String opcion = sc.next();
@@ -289,4 +290,5 @@ public class videojuego {
         }
         return soldadoA;
     }
+    
 }
